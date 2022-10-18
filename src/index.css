@@ -1,0 +1,152 @@
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.logo {
+  text-align: center;
+  text-decoration: none;
+}
+
+.title {
+  text-align: center;
+  padding: 10px;
+  }
+
+.search {
+  margin-top: 20px;
+  text-align: center;
+
+}
+
+.bar{
+  margin-right: 15px;
+  border-style: none;
+  box-shadow: 0 0 10px 5px #a3a3a3;
+  border-radius: 10px;
+  width: 50%;
+  height:  5vh;
+}
+
+.submit {
+  width: 10%;
+  height: 6vh;
+  border-style: none;
+  border-radius: 10px;
+  background-color: #3bc472;
+  cursor: pointer;
+
+}
+.submit:hover {
+  box-shadow: 0 0 10px 5px #a3a3a3;
+}
+
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding: 10px;
+  margin: 10px 10px;
+  align-items: baseline;
+
+
+}
+
+.Card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.title {
+  height: 50px;
+
+}
+.title h3 {
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: black;
+
+}
+.gallery {
+  max-height: 80vh;
+}
+
+.gallery img {
+  width: 100%;
+  height:100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+/* DETAIL PAGE */
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.btns button{
+  margin: 10px;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px grey;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  width: 200px;
+  height: 50px;
+}
+
+.btns button:hover {
+  box-shadow: inset 0 0 10px 5px green;
+}
+
+
+.detailPage {
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
+  padding: 10px;
+  margin: 10px;
+
+}
+.detailCard {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+}
+.detailPage img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.detailSummary{
+  text-align: right;
+  padding: 10px;
+}
+
+ul {
+  list-style: none;
+  text-align: left;
+}
