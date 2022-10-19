@@ -12,11 +12,16 @@ function Results(){
   console.log(params)
 
   const getResults = async (name) => {
+    try {
     const data = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&number=9&query=${name}`)
 
       const recipes = await data.json()
       setResultRecipes(recipes.results)
       console.log(recipes.results)
+  }catch(err) {
+    console.log(err)
+    alert(err)
+   }
   }
 
   useEffect(() => {

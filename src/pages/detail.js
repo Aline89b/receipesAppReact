@@ -24,12 +24,17 @@ const styles = {
 
 
 const fetchDetails = async () => {
+try {
   const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipeId}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
   const detailData = await data.json()
   setDetail(detailData)
   console.log(detailData)
   console.log(detailData.extendedIngredients)
 
+}catch(err) {
+  console.log(err)
+  alert(err)
+ }
 }
 
 useEffect(() => {
