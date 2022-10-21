@@ -13,9 +13,28 @@ code {
     monospace;
 }
 
-.logo {
+.wrapperFav {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+
+}
+.myList {
+  color: rgb(17, 224, 17);
+}
+
+.myListPage h2 {
   text-align: center;
+}
+
+.logo {
   text-decoration: none;
+  color: rgb(216, 23, 23);
+  
 }
 
 .title {
@@ -141,7 +160,7 @@ a:link {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-
+ 
 }
 
 .detailPage img{
@@ -158,6 +177,8 @@ a:link {
 .detailSummary{
   text-align: right;
   padding: 10px;
+  font-size: 1.2rem;
+
 }
 
 @media (max-width: 768px){
