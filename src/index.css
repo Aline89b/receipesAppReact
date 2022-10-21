@@ -30,7 +30,7 @@ code {
 }
 
 .bar{
-  margin-right: 15px;
+  
   border-style: none;
   font-size: 1.2rem;
   box-shadow: 0 0 10px 5px #a3a3a3;
@@ -42,7 +42,7 @@ code {
 
 .submit {
   width: 20vw;
-    margin-top: 2%;
+    margin: 2%;
     font-size: 1.2rem;
     height: 8vh;
     border-style: none;
@@ -76,8 +76,11 @@ code {
 }
 
 .title {
-  height: 50px;
-
+  height: 4rem;
+  
+}
+a:link {
+  text-decoration: none;
 }
 .title h3 {
   text-align: center;

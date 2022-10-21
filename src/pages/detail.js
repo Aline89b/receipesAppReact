@@ -10,6 +10,27 @@ import '../index.css';
 function Detail(){
 let params = useParams()
 const [detail, setDetail] = useState({})
+const [fav, setFav] = useState(()=> {
+  const fav = JSON.parse(localStorage.getItem('fav'));
+   return fav || [];
+  })
+
+
+const addToMyList =  (detail) => {
+  setFav([detail, ...fav])
+ console.log(fav)
+}
+useEffect(() => {
+  localStorage.setItem("fav", JSON.stringify(fav))
+}, [fav])
+
+useEffect(() => {
+  const fav = JSON.parse(localStorage.getItem('fav'));
+  if (fav) {
+   setFav(fav);
+  }
+}, []);
+
 const[open, setOpen] = useState()
 const styles = {
   receipe: {
@@ -30,6 +51,8 @@ try {
   setDetail(detailData)
   console.log(detailData)
   console.log(detailData.extendedIngredients)
+   
+
 
 }catch(err) {
   console.log(err)
@@ -40,6 +63,7 @@ try {
 useEffect(() => {
   fetchDetails()
 },[params.detail])
+
 
   return (
     <div>
@@ -60,6 +84,10 @@ useEffect(() => {
                   <button className="instructions"
                     onClick= {() => {setOpen(true)}}>
                   INSTRUCTIONS
+                  </button>
+                  <button className="save"
+                    onClick= {() => {addToMyList(detail)}}>
+                  SAVE
                   </button>
                 </div>
                 <div className="detailSummary">
