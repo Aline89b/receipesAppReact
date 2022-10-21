@@ -33,6 +33,10 @@ const styles = {
     },
     
 }
+const remove = (index) => {
+    const newFav = fav.filter((_, i) => i !== index);
+    setFav(newFav);
+  };
 
     return(
         <div className="myListPage">
@@ -40,8 +44,8 @@ const styles = {
             < SearchBar />
             <h2>My List of favourite receipes</h2>
          <div className="wrapperFav">
-           {fav.map((item) => (
-            <div className="detailPage" >
+           {fav.map((item, index) => (
+            <div className="detailPage" key ={index} >
                 <div className="img">
                   <img src= {item.image} alt= {item.title} />
                 </div>
@@ -54,6 +58,10 @@ const styles = {
                       <button className="instructions"
                         onClick= {() => {setOpen(true)}}>
                       INSTRUCTIONS
+                      </button>
+                      <button className="remove"
+                        onClick= {() => {remove(index)}}>
+                      REMOVE
                       </button>
                       </div>
                     <div className="detailSummary">
