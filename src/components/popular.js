@@ -1,34 +1,22 @@
 import React from "react"
-import { useEffect, useState} from "react"
+
 import "../index.css"
 import {Link} from "react-router-dom"
-
+import useFetchData from "../hooks/useFetchData"
 
 
 function Popular() {
-const [popular, setPopular] = useState([]);
+  const {data,loading,error} = useFetchData(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags="vegetarian"`)
 
-  useEffect(()=> {
-    getPopular()
-  },[])
-
-  const getPopular = async () => {
-  try{ 
-    const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags="vegetarian"`)
-    const data = await api.json()
-    console.log(data)
-    setPopular(data.recipes)
-  } catch(err) {
-    console.log(err)
-    alert(err)
-   }
-  };
-
-
+ if(error){
+  console.log(error)
+ }
+console.log(data)
     return(
-      <div className="wrapper">
-
-         {popular.map((recipe) => {
+      
+      <div>
+        {loading && <p>Loading...</p>}
+         {data && <div className="wrapper">{data.map((recipe) => {
             return(
 
              <Link to={`/detail/${recipe.id}`}>
@@ -44,7 +32,8 @@ const [popular, setPopular] = useState([]);
 
             );
            })}
-
+          </div>
+          }   
         </div>
       )
   }

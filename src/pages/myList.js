@@ -1,15 +1,17 @@
-import React from "react";
 import {useEffect, useState} from "react"
 import '../index.css';
 import SearchBar from "../components/searchBar"
 import Header from "../components/header"
+import axios from "axios"
+import useFetchData from "../hooks/useFetchData";
+
 
 
 function MyList() {
  const [fav, setFav] = useState(()=> {
   const fav = JSON.parse(localStorage.getItem('fav'));
   console.log(fav)
-   return fav || [];
+     return fav || [];
   })
   useEffect(() => {
     localStorage.setItem("fav", JSON.stringify(fav))
@@ -21,6 +23,27 @@ useEffect(() => {
    setFav(fav);
   }
 }, []);
+const [newArr, setNewArr] = useState([]);
+
+
+useEffect(() => {
+  fav.map((id) => {
+    axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
+      .then((res) => {
+      
+        console.log(res)
+        setNewArr(newArr)
+        newArr.push(res.data);
+        console.log(newArr)
+
+      })
+      .catch((err) => console.log(err))
+     });
+
+}, [fav]);
+  
+
+
 const[open, setOpen] = useState()
 const styles = {
   receipe: {
@@ -33,18 +56,23 @@ const styles = {
     },
     
 }
+
 const remove = (index) => {
-    const newFav = fav.filter((_, i) => i !== index);
-    setFav(newFav);
+    const newFav = newArr.filter((_, i) => i !== index);
+    setNewArr(newFav);
   };
 
-    return(
+  
+   return (
         <div className="myListPage">
             < Header />
             < SearchBar />
-            <h2>My List of favourite receipes</h2>
+            <h2>My List of favourite recipes</h2>
          <div className="wrapperFav">
-           {fav.map((item, index) => (
+       
+           { newArr.map((item, index) => 
+           
+           (
             <div className="detailPage" key ={index} >
                 <div className="img">
                   <img src= {item.image} alt= {item.title} />
@@ -53,7 +81,7 @@ const remove = (index) => {
                   <div className="btns">
                     <button className="receipe"
                       onClick= {() => {setOpen(false)}}>
-                    RECEIPE
+                    RECIPE
                     </button>
                       <button className="instructions"
                         onClick= {() => {setOpen(true)}}>
@@ -85,6 +113,7 @@ const remove = (index) => {
              ))}</div>
               </div>
             )
+            
           
           }
        

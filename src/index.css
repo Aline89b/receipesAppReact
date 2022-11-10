@@ -1,4 +1,8 @@
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -18,11 +22,6 @@ code {
   flex-wrap: wrap;
 }
 
-header {
-  display: flex;
-  justify-content: space-around;
-
-}
 .myList {
   color: rgb(17, 224, 17);
 }
@@ -129,14 +128,13 @@ a:link {
 }
 
 .btns button{
-  margin: 10px;
+  margin: 8px;
   text-transform: uppercase;
   box-shadow: 0 0 10px grey;
   cursor: pointer;
   border: none;
   border-radius: 10px;
-  width: 200px;
-  height: 50px;
+  padding: 0.6rem;
 }
 
 .btns button:hover {
