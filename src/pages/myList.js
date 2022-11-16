@@ -3,7 +3,7 @@ import '../index.css';
 import SearchBar from "../components/searchBar"
 import Header from "../components/header"
 import axios from "axios"
-import useFetchData from "../hooks/useFetchData";
+
 
 
 
@@ -23,25 +23,7 @@ useEffect(() => {
    setFav(fav);
   }
 }, []);
-const [newArr, setNewArr] = useState([]);
 
-
-useEffect(() => {
-  fav.map((id) => {
-    axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
-      .then((res) => {
-      
-        console.log(res)
-        setNewArr(newArr)
-        newArr.push(res.data);
-        console.log(newArr)
-
-      })
-      .catch((err) => console.log(err))
-     });
-
-}, [fav]);
-  
 
 
 const[open, setOpen] = useState()
@@ -59,41 +41,80 @@ const styles = {
 
 const remove = (index) => {
     const newFav = newArr.filter((_, i) => i !== index);
-    setNewArr(newFav);
+    const newFavId = fav.filter((_, i) => i !== index);
+    console.log(newFavId)
+    setFav(newFavId)
+    console.log(newFav)
+      setNewArr(newFav);
+    
   };
+  const [newArr, setNewArr] = useState(() => {
+    const newArr = JSON.parse(localStorage.getItem('newArr'));
+    console.log(newArr)
+       return newArr || [];
+    })
+    useEffect(() => {
+      localStorage.setItem("newArr", JSON.stringify(newArr))
+    }, [newArr])
+  
+  useEffect(() => {
+    const newArr = JSON.parse(localStorage.getItem('newArr'));
+    if (newArr) {
+     setNewArr(newArr);
+    }
+  }, []);
+  useEffect(() => {
+      const getMyList = () => {
+        fav.map((id) => {
+          axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
+            .then((res) => {
+              console.log(res)
+              setNewArr(newArr)
+              newArr.push(res.data);
+              console.log(newArr)
+              
+            })
+            .catch((err) => console.log(err))
+          });
+          setNewArr(newArr)
+      }
+              
+}, []);
+  
+
 
   
    return (
         <div className="myListPage">
             < Header />
             < SearchBar />
-            <h2>My List of favourite recipes</h2>
-         <div className="wrapperFav">
+            <h2 className="text-2xl font-bold uppercase">My List of favourite recipes</h2>
+         <div className=" flex flex-wrap">
        
-           { newArr.map((item, index) => 
+           {newArr && newArr.map((item, index) => 
            
            (
-            <div className="detailPage" key ={index} >
-                <div className="img">
-                  <img src= {item.image} alt= {item.title} />
+            <div className=" flex flex-col lg:flex-row p-8 " key ={index} >
+                <div className=" object-cover ">
+                  <img className=" w-full h-full rounded-xl object-cover" src= {item.image} alt= {item.title} />
                 </div>
-                <div className="detailCard">
-                  <div className="btns">
-                    <button className="receipe"
+                <div className=" w-full p-8 text-right">
+                  <div className="flex p-4 justify-around">
+                    <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 "
                       onClick= {() => {setOpen(false)}}>
                     RECIPE
                     </button>
-                      <button className="instructions"
+                      <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:shadow-secondary"
                         onClick= {() => {setOpen(true)}}>
                       INSTRUCTIONS
                       </button>
-                      <button className="remove"
+                      <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:shadow-secondary"
                         onClick= {() => {remove(index)}}>
                       REMOVE
                       </button>
                       </div>
                     <div className="detailSummary">
-                     <div className="summary" style={styles.summary}>
+                     <div className="text-center p-8 " style={styles.summary}>
                         <h1>{item.title}</h1>
                         <p dangerouslySetInnerHTML={{__html:item.summary}}></p>
                         </div>

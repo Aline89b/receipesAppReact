@@ -16,7 +16,7 @@ root.render(
       <Route index="/" element={<App />} />
           <Route path="/Results/:results" element={<Results />} />
           <Route path="/detail/:recipeId" element={<Detail />} />
-          <Route path="/myList/" element={<MyList />} />
+      <Route path="/myList/" element={<MyList />} />
       </Routes>
   </Router>
 

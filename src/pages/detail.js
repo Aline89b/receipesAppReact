@@ -97,17 +97,17 @@ function Detail(){
               <div className="img">
                 <img className=" w-full object-cover md:w-32 lg:w-48 " src= {detail.image} alt= {detail.title} />
               </div>
-              <div className="detailCard">
-                  <div className="btns">
-                  <button className="receipe p-2"
+              <div className="w-full p-8 text-right">
+                  <div className="flex p-4 justify-around">
+                  <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 "
                     onClick= {() => {setOpen(false)}}>
                   RECIPE
                   </button>
-                    <button className="instructions"
+                    <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 "
                       onClick= {() => {setOpen(true)}}>
                     INSTRUCTIONS
                     </button>
-                    <button disabled={disable} className="save" style={styles.save}
+                    <button disabled={disable} className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 " style={styles.save}
                       onClick= {changeTextBtn}> {btnText}
                     
                     </button>
