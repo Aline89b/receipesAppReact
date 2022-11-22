@@ -68,25 +68,24 @@ const remove = (index) => {
     }
   }, []);
   
-  useEffect(() => {
+  
       const getMyList = () => {
-        
+       
         fav.map((id) => {
           axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
             .then((res) => {
-             newArr.push(res.data) 
-            setNewArr(_prevState => newArr)
-             
+              console.log(res.data)
+              setNewArr([...newArr, res.data])
             })
             
             .catch((err) => console.log(err))
           });
-          
-          getMyList()
+            console.log(newArr)
+          setNewArr(newArr)
         
       }
-     
-      
+      useEffect(() => {
+           getMyList()
         },[fav]);
   
 
