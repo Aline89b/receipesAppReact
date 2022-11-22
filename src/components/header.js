@@ -7,9 +7,9 @@ import MyList from "../pages/myList"
 function Header(){
 
   return (
-    <header className="flex  justify-around text-xl font-medium">
-        <Link to="/"><h2 className="logo">Cooking with < FaHeart /></h2></Link>
-        <Link to="/myList/"><h2 className="myList">My List</h2></Link>
+    <header className="flex text-center w-full justify-around text-xl font-medium">
+        <Link to="/"><h2 className="decoration-none text-red-700 ">Cooking with < FaHeart /></h2></Link>
+        <Link to="/myList/"><h2 className="text-green-500">My List</h2></Link>
     </header>
   )
 }

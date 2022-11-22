@@ -21,7 +21,7 @@ function SearchBar(){
     console.log(e.target.value)
   }
   return(
-<div className="search">
+<div className="text-center w-full">
       <form onSubmit={submit}>
         <input className="bar" onChange={handleChange}
           type="text"

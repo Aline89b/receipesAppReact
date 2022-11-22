@@ -18,29 +18,8 @@ code {
 }
 
 
-.myList {
-  color: rgb(17, 224, 17);
-}
-
-.myListPage h2 {
-  text-align: center;
-}
-
-.logo {
-  text-decoration: none;
-  color: rgb(216, 23, 23);
-  
-}
-
-.title {
-  text-align: center;
-  padding: 10px;
-  }
-
-.search {
-  margin-top: 20px;
-  text-align: center;
-
+.root {
+  width: 100%;
 }
 
 .bar{
@@ -49,7 +28,7 @@ code {
   font-size: 1.2rem;
   box-shadow: 0 0 10px 5px #a3a3a3;
   border-radius: 10px;
-  width: 50%;
+  
   height: 7vh;
 }
 
@@ -117,80 +96,7 @@ a:link {
 
 /* DETAIL PAGE */
 
-.btns {
-  display: flex;
-  justify-content: flex-around;
-  padding: 20px;
-}
-.btns button {
-  margin: 2px;
-}
 
-
-
-.detailPage {
-  display: flex;
-  text-align: right;
-  font-size: 1.3rem;
-  justify-content: flex-end;
-  padding: 10px;
-  margin: 10px;
-
-}
-
-.detailCard {
-  display: flex;
-  width: 50%;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
- 
-}
-
-.detailPage img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-.summary {
-  margin-top: -7%;
-}
-
-.detailSummary{
-  text-align: right;
-  padding: 10px;
-  font-size: 1.2rem;
-
-}
-/*
-@media (max-width: 768px){
-  .detailPage {
-    flex-wrap: wrap;
-  }
-  .detailCard {
-    width: 100%;
-  }
-
-.detailSummary{
-  text-align: center;
-}
-.btns {
-  justify-content: space-around; 
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-  }
-  .img {
-    width: 100%;
-}
-}
-
-*/
 ul {
   list-style: none;
   text-align: left;

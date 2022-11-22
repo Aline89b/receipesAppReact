@@ -48,11 +48,15 @@ const remove = (index) => {
       setNewArr(newFav);
     
   };
-  const [newArr, setNewArr] = useState(() => {
+
+ 
+  
+   const [newArr, setNewArr] = useState(() => {
     const newArr = JSON.parse(localStorage.getItem('newArr'));
     console.log(newArr)
        return newArr || [];
     })
+    
     useEffect(() => {
       localStorage.setItem("newArr", JSON.stringify(newArr))
     }, [newArr])
@@ -63,43 +67,47 @@ const remove = (index) => {
      setNewArr(newArr);
     }
   }, []);
+  
   useEffect(() => {
       const getMyList = () => {
+        
         fav.map((id) => {
           axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
             .then((res) => {
-              console.log(res)
-              setNewArr(newArr)
-              newArr.push(res.data);
-              console.log(newArr)
-              
+             newArr.push(res.data) 
+            setNewArr(_prevState => newArr)
+             
             })
+            
             .catch((err) => console.log(err))
           });
-          setNewArr(newArr)
+          
+          getMyList()
+        
       }
-              
-}, []);
+     
+      
+        },[fav]);
   
 
 
   
    return (
-        <div className="myListPage">
+        <div className="w-full m-0">
             < Header />
             < SearchBar />
-            <h2 className="text-2xl font-bold uppercase">My List of favourite recipes</h2>
+            <h2 className="text-center text-2xl font-bold uppercase">My List of favourite recipes</h2>
          <div className=" flex flex-wrap">
        
-           {newArr && newArr.map((item, index) => 
+           { newArr && newArr.map((item, index) => 
            
            (
             <div className=" flex flex-col lg:flex-row p-8 " key ={index} >
-                <div className=" object-cover ">
+                <div className=" w-full ">
                   <img className=" w-full h-full rounded-xl object-cover" src= {item.image} alt= {item.title} />
                 </div>
                 <div className=" w-full p-8 text-right">
-                  <div className="flex p-4 justify-around">
+                  <div className="flex p-4 justify-around text-center">
                     <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 "
                       onClick= {() => {setOpen(false)}}>
                     RECIPE
@@ -113,8 +121,8 @@ const remove = (index) => {
                       REMOVE
                       </button>
                       </div>
-                    <div className="detailSummary">
-                     <div className="text-center p-8 " style={styles.summary}>
+                    <div className="flex justify-center">
+                     <div className="text-center p-1 text-lg " style={styles.summary}>
                         <h1>{item.title}</h1>
                         <p dangerouslySetInnerHTML={{__html:item.summary}}></p>
                         </div>

@@ -91,11 +91,11 @@ function Detail(){
       <div>
         <Header />
         <div className="detailWrapper">
-          <h1 className="title "> RECEIPE </h1>
+          <h1 className="text-center font-bold text-lg "> RECEIPE </h1>
             <SearchBar />
-          <div className="detailPage">
-              <div className="img">
-                <img className=" w-full object-cover md:w-32 lg:w-48 " src= {detail.image} alt= {detail.title} />
+          <div className="flex flex-col lg:flex-row p-8">
+              <div className="w-full h-full object-cover">
+                <img className=" w-full rounded object-cover " src= {detail.image} alt= {detail.title} />
               </div>
               <div className="w-full p-8 text-right">
                   <div className="flex p-4 justify-around">
@@ -112,8 +112,8 @@ function Detail(){
                     
                     </button>
                   </div>
-                  <div className="detailSummary">
-                  <div className=" mt-1" style={styles.summary}>
+                  <div className="flex justify-center">
+                  <div className=" text-center p-1" style={styles.summary}>
                       <h1>{detail.title}</h1>
                       <p dangerouslySetInnerHTML={{__html:detail.summary}}></p>
                       </div>

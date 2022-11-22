@@ -6,9 +6,9 @@ import Header from "./components/header"
 
 function App() {
   return (
-    <div className="App">
+    <div className="w-full">
       <Header />
-      <h1 className="title"> Vegetarian Receipes App </h1>
+      <h1 className="text-center font-bold text-lg"> Vegetarian Receipes App </h1>
       <Home />
     </div>
   );
