@@ -67,24 +67,22 @@ const styles = {
       try{
         const res = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
         console.log(res.data)
-        console.log(res.data.id)
-              
-       newArr.push(res.data) 
-       console.log(newArr)
+        const data = res.data.id
+        if(fav.includes(data)) {     
+          newArr.push(res.data)
+      }else {
+        return newArr 
+      }
+      
         
       } 
       catch(error) {
         console.log(error)
       } 
+      setNewArr(newArr)
      })
       
-      setNewArr(prevState => {
-        if (prevState) {
-          return prevState ;
-        }else {
-        return [...prevState, newArr.slice(-1)]
-      } 
-        })
+      
       
       },[fav]);
   
