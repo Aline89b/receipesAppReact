@@ -39,15 +39,7 @@ const styles = {
     
 }
 
-const remove = (index) => {
-    const newFav = newArr.filter((_, i) => i !== index);
-    const newFavId = fav.filter((_, i) => i !== index);
-    console.log(newFavId)
-    setFav(newFavId)
-    console.log(newFav)
-      setNewArr(newFav);
-    
-  };
+
 
  
   
@@ -57,56 +49,74 @@ const remove = (index) => {
        return newArr || [];
     })
     
-    useEffect(() => {
+   useEffect(() => {
       localStorage.setItem("newArr", JSON.stringify(newArr))
     }, [newArr])
   
   useEffect(() => {
-    const newArr = JSON.parse(localStorage.getItem('newArr'));
+   const newArr = JSON.parse(localStorage.getItem('newArr'));
     if (newArr) {
      setNewArr(newArr);
     }
-  }, []);
   
-  
-      const getMyList = () => {
-       
-        fav.map((id) => {
-          axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
-            .then((res) => {
-              console.log(res.data)
-              setNewArr([...newArr, res.data])
-            })
-            
-            .catch((err) => console.log(err))
-          });
-            console.log(newArr)
-          setNewArr(newArr)
-        
-      }
-      useEffect(() => {
-           getMyList()
-        },[fav]);
-  
+  }, []); 
+ 
+  useEffect(() => {
 
+     fav.map(async(id) => {
+      try{
+        const res = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
+        console.log(res.data)
+        console.log(res.data.id)
+              
+       newArr.push(res.data) 
+       console.log(newArr)
+        
+      } 
+      catch(error) {
+        console.log(error)
+      } 
+     })
+      
+      setNewArr(prevState => {
+        if (prevState) {
+          return prevState ;
+        }else {
+        return [...prevState, newArr.slice(-1)]
+      } 
+        })
+      
+      },[fav]);
+  
+        const remove = (index) => {
+          const newFav = newArr.filter((_, i) => i !== index);
+          const newFavId = fav.filter((_, i) => i !== index);
+          console.log(newFavId)
+          setFav(newFavId)
+          console.log(newFav)
+            setNewArr(newArr);
+          
+        };
 
   
    return (
-        <div className="w-full m-0">
-            < Header />
-            < SearchBar />
-            <h2 className="text-center text-2xl font-bold uppercase">My List of favourite recipes</h2>
+        <div className="w-full">
+           <div className="sm: width-full">
+              < Header />
+              < SearchBar />
+              <h2 className="text-center text-2xl font-bold uppercase">My List of favourite recipes</h2>
+            </div>
          <div className=" flex flex-wrap">
        
            { newArr && newArr.map((item, index) => 
            
            (
             <div className=" flex flex-col lg:flex-row p-8 " key ={index} >
-                <div className=" w-full ">
+                <div className=" max-w-full ">
                   <img className=" w-full h-full rounded-xl object-cover" src= {item.image} alt= {item.title} />
                 </div>
                 <div className=" w-full p-8 text-right">
-                  <div className="flex p-4 justify-around text-center">
+                  <div className="flex flex:wrap p-4 justify-around text-center">
                     <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 "
                       onClick= {() => {setOpen(false)}}>
                     RECIPE
