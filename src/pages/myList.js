@@ -16,13 +16,13 @@ function MyList() {
   useEffect(() => {
     localStorage.setItem("fav", JSON.stringify(fav))
   }, [fav])
-
+/*
 useEffect(() => {
   const fav = JSON.parse(localStorage.getItem('fav'));
   if (fav) {
    setFav(fav);
   }
-}, []);
+}, []);*/
 
 
 
@@ -43,15 +43,16 @@ const styles = {
 
  
   
-   const [newArr, setNewArr] = useState(() => {
+   const [newArr, setNewArr] = useState([])
+   /* () => {
     const newArr = JSON.parse(localStorage.getItem('newArr'));
     console.log(newArr)
        return newArr || [];
-    })
+    }*/
     
    useEffect(() => {
       localStorage.setItem("newArr", JSON.stringify(newArr))
-    }, [newArr])
+    }, [fav])
   
   useEffect(() => {
    const newArr = JSON.parse(localStorage.getItem('newArr'));
@@ -62,28 +63,27 @@ const styles = {
   }, []); 
  
   useEffect(() => {
-
+    if(fav) {
      fav.map(async(id) => {
       try{
         const res = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
         console.log(res.data)
-        const data = res.data.id
-        if(fav.includes(data)) {     
-          newArr.push(res.data)
-      }else {
-        return newArr 
-      }
+        if(newArr.includes(id)){
+          console.log(newArr)
+          return newArr
+        }else{
+      newArr.push(res.data)
       
-        
+    }
+    setNewArr(newArr)  
       } 
       catch(error) {
         console.log(error)
       } 
-      setNewArr(newArr)
-     })
+    })
       
-      
-      
+  }
+    
       },[fav]);
   
         const remove = (index) => {
@@ -92,7 +92,7 @@ const styles = {
           console.log(newFavId)
           setFav(newFavId)
           console.log(newFav)
-            setNewArr(newArr);
+            setNewArr(newFav);
           
         };
 
