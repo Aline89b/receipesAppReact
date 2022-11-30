@@ -39,16 +39,11 @@ const styles = {
     
 }
 
-
-
- 
-  
-   const [newArr, setNewArr] = useState([])
-   /* () => {
+   const [newArr, setNewArr] = useState(() => {
     const newArr = JSON.parse(localStorage.getItem('newArr'));
     console.log(newArr)
        return newArr || [];
-    }*/
+    })
     
    useEffect(() => {
       localStorage.setItem("newArr", JSON.stringify(newArr))
@@ -68,18 +63,15 @@ const styles = {
       try{
         const res = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
         console.log(res.data)
-        if(newArr.includes(id)){
-          console.log(newArr)
-          return newArr
-        }else{
+       
       newArr.push(res.data)
       
-    }
-    setNewArr(newArr)  
+     console.log(newArr)
       } 
       catch(error) {
         console.log(error)
       } 
+      setNewArr(newArr) 
     })
       
   }
