@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/receipesAppReact/static/css/main.55a95ab4.css",
-    "main.js": "/receipesAppReact/static/js/main.cc10f305.js",
+    "main.css": "/receipesAppReact/static/css/main.d9bd5a6f.css",
+    "main.js": "/receipesAppReact/static/js/main.bc15c72f.js",
     "index.html": "/receipesAppReact/index.html",
-    "main.55a95ab4.css.map": "/receipesAppReact/static/css/main.55a95ab4.css.map",
-    "main.cc10f305.js.map": "/receipesAppReact/static/js/main.cc10f305.js.map"
+    "main.d9bd5a6f.css.map": "/receipesAppReact/static/css/main.d9bd5a6f.css.map",
+    "main.bc15c72f.js.map": "/receipesAppReact/static/js/main.bc15c72f.js.map"
   },
   "entrypoints": [
-    "static/css/main.55a95ab4.css",
-    "static/js/main.cc10f305.js"
+    "static/css/main.d9bd5a6f.css",
+    "static/js/main.bc15c72f.js"
   ]
 }
