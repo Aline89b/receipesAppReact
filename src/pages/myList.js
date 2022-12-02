@@ -39,11 +39,13 @@ const styles = {
     
 }
 
-   const [newArr, setNewArr] = useState(() => {
+   const [newArr, setNewArr] = useState([])
+   const [filteredArr, setFilteredArr] =useState([])
+    /*() => {
     const newArr = JSON.parse(localStorage.getItem('newArr'));
     console.log(newArr)
        return newArr || [];
-    })
+    })*/
     
    useEffect(() => {
       localStorage.setItem("newArr", JSON.stringify(newArr))
@@ -57,29 +59,39 @@ const styles = {
   
   }, []); 
  
+ 
   useEffect(() => {
+    
     if(fav) {
      fav.map(async(id) => {
       try{
         const res = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
         console.log(res.data)
-       
-      newArr.push(res.data)
       
-     console.log(newArr)
+       newArr.push(res.data)
+       console.log(newArr)
+       
+
       } 
       catch(error) {
         console.log(error)
       } 
-      setNewArr(newArr) 
+      const filteredArr = Array.from(new Set(newArr.map(a => a.id)))
+        .map(id => {
+          return newArr.find(a => a.id === id)
+        })
+        console.log(filteredArr)
+      setFilteredArr(filteredArr)
+       
     })
       
   }
-    
+  
+   
       },[fav]);
   
         const remove = (index) => {
-          const newFav = newArr.filter((_, i) => i !== index);
+          const newFav = filteredArr.filter((_, i) => i !== index);
           const newFavId = fav.filter((_, i) => i !== index);
           console.log(newFavId)
           setFav(newFavId)
@@ -90,23 +102,23 @@ const styles = {
 
   
    return (
-        <div className="w-full">
-           <div className="sm: width-full">
+        <div className=" w-full">
+           <div className="flex flex-col sm:width-full">
               < Header />
               < SearchBar />
               <h2 className="text-center text-2xl font-bold uppercase">My List of favourite recipes</h2>
             </div>
          <div className=" flex flex-wrap">
        
-           { newArr && newArr.map((item, index) => 
+           { filteredArr && filteredArr.map((item, index) => 
            
            (
-            <div className=" flex flex-col lg:flex-row p-8 " key ={index} >
+            <div className="flex flex-col lg:flex-row p-8 " key ={index} >
                 <div className=" max-w-full ">
                   <img className=" w-full h-full rounded-xl object-cover" src= {item.image} alt= {item.title} />
                 </div>
                 <div className=" w-full p-8 text-right">
-                  <div className="flex flex:wrap p-4 justify-around text-center">
+                  <div className="flex-col lg:flex-row p-4 justify-around text-center">
                     <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 "
                       onClick= {() => {setOpen(false)}}>
                     RECIPE
