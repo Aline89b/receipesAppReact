@@ -6,6 +6,7 @@ import SearchBar from "../components/searchBar"
 import Header from "../components/header"
 import '../index.css';
 import useDetailData from "../hooks/useDetailData"
+import Button from "../components/button"
 
 
 
@@ -98,18 +99,18 @@ function Detail(){
               </div>
               <div className="w-full p-8 text-right">
                   <div className="flex p-4 justify-around">
-                  <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 "
-                    onClick= {() => {setOpen(false)}}>
-                  RECIPE
-                  </button>
-                    <button className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 "
-                      onClick= {() => {setOpen(true)}}>
-                    INSTRUCTIONS
-                    </button>
-                    <button disabled={disable} className="m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500 " style={styles.save}
-                      onClick= {changeTextBtn}> {btnText}
+                  <Button
+                   click= {() => {setOpen(false)}}
+                   text= {"RECIPE"}
+                    />
+                   <Button
+                   click= {() => {setOpen(true)}}
+                   text= {"INSTRUCTIONS"}
+                    />
+                    <Button disabled={disable} style={styles.save}
+                      click= {changeTextBtn} text = {btnText}
                     
-                    </button>
+                    />
                   </div>
                   <div className="flex justify-center">
                   <div className=" text-center p-1" style={styles.summary}>

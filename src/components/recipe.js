@@ -26,18 +26,19 @@ const styles = {
                 </div>
                 <div className=" w-full p-8 text-right">
                   <div className="flex-col lg:flex-row p-4 justify-around text-center">
-                  <button className= "m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500"
-                  onClick= {() => {setOpen(false)}}>
-                    RECIPE
-                    </button>
-                      <button className= "m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500"
-                      onClick= {() => {setOpen(true)}}>
-                      INSTRUCTIONS
-                      </button>
-                      <button className= "m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500"
-                      onClick= {() => {props.remove(props.item.id, props.index)}}>
-                      REMOVE
-                      </button>
+                  <Button
+                   click= {() => {setOpen(false)}}
+                   text= {"RECIPE"}
+                    />
+                   <Button
+                   click= {() => {setOpen(true)}}
+                   text= {"INSTRUCTIONS"}
+                    />
+                    <Button
+                   click= {() => {props.remove(props.item.id, props.index)}}
+                   text= {"REMOVE"}
+                    />
+                      
                       </div>
                     <div className="flex justify-center">
                     
