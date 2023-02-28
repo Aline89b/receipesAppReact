@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom"
 import SearchBar from "../components/searchBar"
 import Header from "../components/header"
 import '../index.css';
-import useFetchData from "../hooks/useFetchData"
+import useDetailData from "../hooks/useDetailData"
 
 
 
@@ -65,7 +65,6 @@ function Detail(){
       }
   }
   
-  
   const fetchDetails = async () => {
   try {
     const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipeId}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
@@ -95,7 +94,7 @@ function Detail(){
             <SearchBar />
           <div className="flex flex-col lg:flex-row p-8">
               <div className="w-full h-full object-cover">
-                <img className=" w-full rounded object-cover " src= {detail.image} alt= {detail.title} />
+                <img className=" w-full rounded object-cover " src= {detail?.image} alt= {detail.title} />
               </div>
               <div className="w-full p-8 text-right">
                   <div className="flex p-4 justify-around">

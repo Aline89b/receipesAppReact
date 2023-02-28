@@ -1,32 +1,14 @@
-import React from "react";
-import { useState, useEffect } from "react";
 
+import { useQuery } from "@tanstack/react-query";
+import  Axios  from "axios";
 
 
 export default function useFetchData(url){
 
-    const [data,setData] = useState(null)
-    const [error,setError] = useState(null)
-    const [loading,setLoading] = useState(false)
-
-    useEffect(() => {
-        (
-            async function(){
-                try{
-                    setLoading(true)
-                    const api = await fetch(url)
-                    const data = await api.json()
-                    setData(data.recipes)
-                    console.log(data.recipes)
-                }catch(err){
-                    setError(err)
-                }finally{
-                    setLoading(false)
-                }
-            }
-        )()
-    }, [url])
-
-    return { data, error, loading }
-
+    const { data, isLoading, isError } = useQuery(["recipe"], async () => {
+      return  Axios.get(url).then((res) => res.data)
+    })
+    return { data, isLoading, isError }
 }
+   
+
