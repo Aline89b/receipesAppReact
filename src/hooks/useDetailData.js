@@ -1,10 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import  Axios  from "axios";
 
-export default function useDetailData(url, recipeId){
+export default function useDetailData(recipeId){
+const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+  const getData = (recipeId) = async () => {
+    const response = await Axios.get(url);
+    return response.data;
+  }
+  
 
-    const { data, isError } = useQuery(["recipe", recipeId], async (recipeId) => {
-      return  Axios.get(url/{recipeId}).then((res) => res.data)
-    })
-    return { data, isError }
+
+    const { data } = useQuery(["recipe", recipeId],()=> getData(recipeId))
+    
+    return { data }
 }

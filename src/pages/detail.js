@@ -10,6 +10,7 @@ import Button from "../components/button"
 
 
 
+
 function Detail(){
   let params = useParams()
   const [detail, setDetail] = useState({})
@@ -65,7 +66,7 @@ function Detail(){
         backgroundColor: btnColor ? "green" : " "
       }
   }
-  
+
   const fetchDetails = async () => {
   try {
     const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipeId}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
