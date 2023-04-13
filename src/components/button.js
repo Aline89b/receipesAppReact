@@ -1,23 +1,25 @@
 import React from "react";
 
 
-export default function Button(props) {
+
+export default function Button({click,style,text, disabled}) {
 
     return (
         <button
-        type={props.type}
+        
         className= "m-2 rounded cursor-pointer p-4 shadow-primary hover:bg-yellow-500"
-        onClick={props.click}
-        disable={props.disabled}
-        style={props.style}
+        onClick={click}
+        disable={disabled}
+        style={style}
+        
         > 
-        {props.text} 
+        {text} 
        </button>
     )
 }
         Button.defaultProps = {
             type: "button",
-        
+            text: "SAVE",
             disabled: false
         };
   

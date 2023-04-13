@@ -3,12 +3,12 @@ import '../index.css';
 import SearchBar from "../components/searchBar"
 import Header from "../components/header"
 import axios from "axios"
-import Recipe from "../components/recipe"
-
-
+import RecipeList from "../components/recipesList";
+import { Context } from "../Context";
 
 
 function MyList() {
+ 
  const [fav, setFav] = useState(()=> {
   const fav = JSON.parse(localStorage.getItem('fav'));
   console.log(fav)
@@ -86,13 +86,9 @@ function MyList() {
               < SearchBar />
               <h2 className="text-center text-2xl font-bold uppercase">My List of favourite recipes</h2>
             </div>
-         <div className=" flex flex-wrap">
-       
-           { filteredArr && filteredArr.map((item, index) => 
-              <Recipe remove = {remove} index={index} item = {item} key={item.id} />
-           )}
-
-          </div>
+            <Context.Provider value ={{ filteredArr, remove }}>
+              <RecipeList />
+            </Context.Provider>
         </div>
             )
             
